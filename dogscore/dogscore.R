@@ -10,7 +10,7 @@ avgdraw <- transmute(matchdraw, oddsd=rowMeans(matchdraw[,-11,-12],na.rm=T))
 avgaway <- transmute(matchaway, oddsa=rowMeans(matchaway[,-11,-12],na.rm=T))
 match <- bind_cols(match,avghome,avgdraw,avgaway)
 match <- select(match,-seq(33,62),-c(9,10))
-match <- match[complete.cases(match), ]
+####match <- match[complete.cases(match), ]
 homedogs <- match%>%filter(oddsh>=3.5)%>%group_by(home_team_id)%>%summarise(games=n())
 awaydogs <- match%>%filter(oddsa>=3.5)%>%group_by(away_team_id)%>%summarise(games=n())
 homedogswin <- match%>%filter(oddsh>=3.5,outcome==1)%>%group_by(home_team_id)%>%
